@@ -5,12 +5,12 @@ import type { StrapiData, StrapiDataCollection, StrapiDataItem } from '~/ts/inte
 
 const config = useRuntimeConfig();
 
-const items: Ref<StrapiDataItem<Item>[]>  = ref();
+const items = ref<StrapiDataItem<Item>[]>([]);
 
 onMounted(async () => {
     const response = await fetch(`${config.public.apiUrl}/api/items?populate=*`);
     console.log(response);
-    const data = await JSON.parse( await response.json()) as StrapiDataCollection<Item>;
+    const data = await response.json() as StrapiDataCollection<Item>;
     console.log(data);
     items.value = data.data as StrapiDataItem<Item>[];
 });
@@ -22,12 +22,12 @@ onMounted(async () => {
     <div class="items">
         <!-- <span>{{ items }}</span> -->
         <nuxt-link :to="`/store/item/${item.id}`" class="item" v-for="item in items" :key="item.id">
-            <h2>{{ item.attributes.name }}</h2>
-            <span>Description: {{ item.attributes.description }}</span> <br>
-            <span>Price: {{ item.attributes.price }}</span> <br>
+            <h2>{{ item.attributes.Name }}</h2>
+            <span>Description: {{ item.attributes.Description }}</span> <br>
+            <span>Price: {{ item.attributes.Price }}</span> <br>
             <span>Bookings: {{ item.attributes.bookings.data.length }}</span> <br>
             <!-- <span>{{ `localhost:1337${item.thumbnail.data.attributes.url}`}}</span> -->
-            <img :src="`localhost:1337${item.attributes.thumbnail.data.attributes.url}`" alt="">
+            <img :src="`${$config.public.apiUrl}${item.attributes.Thumbnail.data.attributes.url}`" alt="">
         </nuxt-link>
     </div>
 </template>
