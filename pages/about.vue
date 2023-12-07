@@ -7,17 +7,12 @@ const aboutText = ref<StrapiData<About>>();
 onMounted(async () => {
     const response = await fetch(`http://localhost:1337/api/about/`);
     aboutText.value = await response.json() as StrapiData<About>;
+    console.log(aboutText.value.data.attributes.description);
 });
 </script>
 
 <template>
-    <h1>About</h1>
-
-    <p>
-        {{ aboutText?.data.attributes.description }}
-    </p>
+    <Markdown :source="aboutText?.data.attributes.description ? aboutText.data.attributes.description : '*Nothing found*'" />
 </template>
 
-<style lang="scss" scoped>
-    
-</style>
+<style lang="scss" scoped></style>
