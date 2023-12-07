@@ -1,0 +1,64 @@
+// Generate a modern form style
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+form label span {
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+form label input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+form label input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: $dark-green;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 1rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($dark-green, 10%);
+  }
+}
+
