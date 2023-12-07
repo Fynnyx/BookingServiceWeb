@@ -15,24 +15,24 @@ const logout = () => {
 </script>
 
 <template>
-    <div>
-        <header>
-            <ul>
-                <li><nuxt-link to="/">Home</nuxt-link></li>
-                <li><nuxt-link to="/store">Store</nuxt-link></li>
-                <li><nuxt-link to="/about">About</nuxt-link></li>
-                <li v-if="!authenticated" class="loginBtn" style="float: right">
-                    <nuxt-link to="/login">Login</nuxt-link>
+    <div class="content">
+        <header class="header">
+            <ul class="header__nav">
+                <li class="header__nav__item"><nuxt-link to="/" class="header__nav__item__link">Home</nuxt-link></li>
+                <li class="header__nav__item"><nuxt-link to="/store" class="header__nav__item__link">Store</nuxt-link></li>
+                <li class="header__nav__item"><nuxt-link to="/about" class="header__nav__item__link">About</nuxt-link></li>
+                <li v-if="!authenticated" id="loginBtn" class="header__nav__item__link">
+                    <nuxt-link to="/login" >Login</nuxt-link>
                 </li>
-                <li v-if="authenticated" class="loginBtn" style="float: right">
-                    <nuxt-link @click="logout">Logout</nuxt-link>
+                <li v-if="authenticated" id="logoutBtn" class="header__nav__item">
+                    <nuxt-link @click="logout" class="header__nav__item__link">Logout</nuxt-link>
                 </li>
             </ul>
         </header>
         <div class="mainContent">
             <slot />
         </div>
-        <footer>
+        <footer class="footer">
             <h1>Footer</h1>
         </footer>
     </div>

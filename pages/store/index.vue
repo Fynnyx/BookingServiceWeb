@@ -21,13 +21,13 @@ onMounted(async () => {
     <h1>Store</h1>
     <div class="items">
         <!-- <span>{{ items }}</span> -->
-        <nuxt-link :to="`/store/item/${item.id}`" class="item" v-for="item in items" :key="item.id">
-            <h2>{{ item.attributes.Name }}</h2>
-            <span>Description: {{ item.attributes.Description }}</span> <br>
-            <span>Price: {{ item.attributes.Price }}</span> <br>
-            <span>Bookings: {{ item.attributes.bookings.data.length }}</span> <br>
+        <nuxt-link :to="`/store/item/${item.id}`" class="room-card" v-for="item in items" :key="item.id">
+            <h2 class="room-card__name">{{ item.attributes.Name }}</h2>
+            <span class="room-card__description">Description: {{ item.attributes.Description }}</span>
+            <span class="room-card__price">Price: {{ item.attributes.Price }}</span>
+            <span class="room-card__bookings">Bookings: {{ item.attributes.bookings.data.length }}</span>
             <!-- <span>{{ `localhost:1337${item.thumbnail.data.attributes.url}`}}</span> -->
-            <img :src="`${$config.public.apiUrl}${item.attributes.Thumbnail.data.attributes.url}`" alt="">
+            <img :src="`${$config.public.apiUrl}${item.attributes.Thumbnail.data.attributes.url}`" alt="" class="room-card__thumbnail">
         </nuxt-link>
     </div>
 </template>
@@ -38,16 +38,5 @@ onMounted(async () => {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}
-.item {
-    border: 3px solid $dark-pink;
-    background-color: $pink;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 </style>

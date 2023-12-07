@@ -23,22 +23,18 @@ const login = async () => {
 </script>
   
 <template>
-    <div>
-        <div class="title">
-            <h2>Login</h2>
-        </div>
-        <div class="container form">
-            <form>
-                <label for="uname"><b>Username</b></label>
-                <input v-model="user.identifier" type="text" class="input" placeholder="Enter Username" name="uname"
-                    required />
-                <label for="psw"><b>Password</b></label>
-                <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw"
-                    required />
-                <button @click.prevent="login" type="submit" class="button">Login</button>
-            </form>
-        </div>
-    </div>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="uname"><b>Username</b></label>
+        <input v-model="user.identifier" type="text" class="input" placeholder="Enter Username" name="uname" required />
+        <label for="psw"><b>Password</b></label>
+        <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw" required />
+        <button @click.prevent="login" type="submit" class="button">Login</button>
+    </form>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#loginForm {
+    width: 80vw;
+}
+</style>

@@ -8,6 +8,7 @@ export interface User {
     confirmed: boolean;
     blocked: boolean;
 
+    cart: Cart;
     bookings: Booking[];
 
     createdAt: string;
