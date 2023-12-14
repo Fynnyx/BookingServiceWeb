@@ -8,6 +8,7 @@ export default defineNuxtConfig({
         autoImports: ["defineStore", "acceptHMRUpdate"],
       },
     ],
+    '@samk-dev/nuxt-vcalendar',
   ],
   css: [
     "@/assets/scss/global.scss",

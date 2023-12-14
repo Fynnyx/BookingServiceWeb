@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@pinia/nuxt": "^0.5.1",
+    "@samk-dev/nuxt-vcalendar": "^1.0.2",
     "@types/markdown-it": "^13.0.7",
     "i": "^0.3.7",
     "npm": "^10.2.4",

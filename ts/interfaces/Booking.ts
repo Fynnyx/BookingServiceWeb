@@ -1,8 +1,15 @@
+import type { Item } from "./Item";
+import type { User } from "./User";
+import type { StrapiData } from "./strapi/StrapiData";
+
 export interface Booking {
     id: number;
-    startDate: Date;
-    endDate: Date;
-    comment: string;
+    StartDate: Date;
+    EndDate: Date;
+    comment: string | null;
+
+    user: StrapiData<User>;
+    item: StrapiData<Item>;
 
     created_at: Date;
     updated_at: Date;
