@@ -9,6 +9,13 @@ export interface Item {
     Price: number;
     Thumbnail: StrapiData<Image>;
     Images: StrapiDataCollection<Image>;
+    BedCount: number;
+    hasNetwork: boolean;
+    hasGarden: boolean;
+    hasPool: boolean;
+    hasShower: boolean;
+    hasBathtub: boolean;
+    hasKitchen: boolean;
     bookings: StrapiDataCollection<Booking>;
     created_at: string;
     updated_at: string;

@@ -1,4 +1,5 @@
 import type { Booking } from "./Booking";
+import type { StrapiDataCollection } from "./strapi/StrapiData";
 
 export interface User {
     id: number;
@@ -8,8 +9,7 @@ export interface User {
     confirmed: boolean;
     blocked: boolean;
 
-    cart: Cart;
-    bookings: Booking[];
+    bookings: StrapiDataCollection<Booking>;
 
     createdAt: string;
     updatedAt: string;

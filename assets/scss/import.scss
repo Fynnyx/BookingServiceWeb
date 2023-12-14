@@ -1,3 +1,4 @@
+@import "./vars";
 // General
 @import "./general/forms.scss";
 @import "./general/headings.scss";
@@ -5,4 +6,5 @@
 @import "./general/text.scss";
 
 // Components
+@import "./components/modal.scss";
 @import "./components/room.scss";
