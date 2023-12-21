@@ -9,9 +9,7 @@ const items = ref<StrapiDataItem<Item>[]>([]);
 
 onMounted(async () => {
     const response = await fetch(`${config.public.apiUrl}/api/items?populate=*`);
-    console.log(response);
     const data = await response.json() as StrapiDataCollection<Item>;
-    console.log(data);
     items.value = data.data as StrapiDataItem<Item>[];
 });
 

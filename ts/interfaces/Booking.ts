@@ -8,6 +8,10 @@ export interface Booking {
     EndDate: Date;
     comment: string | null;
 
+    ServiceFood: boolean;
+    ServiceCleaning: boolean;
+    ServiceMinibar: boolean;
+
     user: StrapiData<User>;
     item: StrapiData<Item>;
 

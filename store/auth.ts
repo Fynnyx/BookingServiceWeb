@@ -2,26 +2,22 @@ import { defineStore } from 'pinia';
 import type { Auth, RegisterUser } from '@/ts/interfaces/Auth';
 import type { Cart } from '~/ts/interfaces/Cart';
 import type { Booking } from '~/ts/interfaces/Booking';
+import type { User } from '~/ts/interfaces/User';
 
 interface UserPayloadInterface {
     identifier: string;
     password: string;
 }
 
-interface CookieUser {
-    username: string;
-    email: string;
-    cart: Cart;
-    bookings: Booking[];
-}
-
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
-        user: null as CookieUser | null,
+        user: null as User | null,
         loading: false,
     }),
-
+    getters: {
+        getUser: (state) => state.user,
+    },
     actions: {
         async authenticateUser({ identifier, password }: UserPayloadInterface) {
             const config = useRuntimeConfig(); // useRuntimeConfig new hook in nuxt 3
@@ -37,10 +33,11 @@ export const useAuthStore = defineStore('auth', {
             this.loading = pending;
             if (data.value) {
                 const token = useCookie('token'); // useCookie new hook in nuxt 3
+                const user = useCookie('user'); // useCookie new hook in nuxt 3
                 token.value = data?.value?.jwt; // set token to cookie
+                user.value = data?.value?.user; // set user to cookie
                 this.authenticated = true; // set authenticated  state value to true
-
-                // ToDo: Store whole user in cookie
+                this.user = data.value.user;
             }
         },
         async register(user: RegisterUser): Promise<Auth | undefined> {
@@ -79,16 +76,16 @@ export const useAuthStore = defineStore('auth', {
                 token.value = registeredUser.jwt; // set token to cookie
                 this.authenticated = true; // set authenticated  state value to true
 
-                // ToDo: Store whole user in cookie
-
-
                 return registeredUser;
             }
         },
         logUserOut() {
             const token = useCookie('token'); // useCookie new hook in nuxt 3
+            const user = useCookie('user'); // useCookie new hook in nuxt 3
             this.authenticated = false; // set authenticated  state value to false
+            this.user = null; // set user state value to null
             token.value = null; // clear the token cookie
+            user.value = null; // clear the user cookie
         },
     },
 });

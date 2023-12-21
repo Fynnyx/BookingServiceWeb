@@ -12,17 +12,26 @@ const logout = () => {
     logUserOut();
     router.push('/login');
 };
+
+const authStore = storeToRefs(useAuthStore());
+const user = authStore.user;
 </script>
 
 <template>
     <div class="content">
         <header class="header">
-            <ul class="header__nav">
+            <ul class="header__nav header__nav__left">
                 <li class="header__nav__item"><nuxt-link to="/" class="header__nav__item__link">Home</nuxt-link></li>
                 <li class="header__nav__item"><nuxt-link to="/store" class="header__nav__item__link">Store</nuxt-link></li>
                 <li class="header__nav__item"><nuxt-link to="/about" class="header__nav__item__link">About</nuxt-link></li>
+
+            </ul>
+            <ul class="header__nav header__nav__right">
+                <li class="header__nav__item" v-if="authenticated">
+                    <span>Authenticated as: <b>{{ user?.username }}</b></span>
+                </li>
                 <li v-if="!authenticated" id="loginBtn" class="header__nav__item__link">
-                    <nuxt-link to="/login" >Login</nuxt-link>
+                    <nuxt-link to="/login">Login</nuxt-link>
                 </li>
                 <li v-if="authenticated" id="logoutBtn" class="header__nav__item">
                     <nuxt-link @click="logout" class="header__nav__item__link">Logout</nuxt-link>

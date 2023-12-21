@@ -10,12 +10,11 @@ const urlService = new UrlService();
 
 const route = useRoute();
 const id = route.params.id;
-const item = ref<StrapiDataItem<Item>>();
+const item = ref<StrapiDataItem<Item> | null>();
 
 
 onMounted(async () => {
     const response = await fetch(`${urlService.getApiUrl()}/api/items/${id}?populate=*`);
-    console.log(response);
     const data = await response.json() as StrapiData<Item>;
     item.value = data.data;
 });
@@ -26,7 +25,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="store-item">
+    <div class="store-item" v-if="item">
         <div class="store-item__meta">
             <h1>{{ item?.attributes.Name }}</h1>
             <div class="store-item__meta__stats">
@@ -66,7 +65,7 @@ onMounted(async () => {
             </div>
         </div>
         <div class="store-item__thumnail">
-            <img :src="urlService.apiUrl + item?.attributes.Thumbnail?.data.attributes.url" alt="Thumbnail">
+            <img :src="urlService.apiUrl + item?.attributes.Thumbnail?.data?.attributes.url" alt="Thumbnail">
 
         </div>
         <div class="store-item__description">
