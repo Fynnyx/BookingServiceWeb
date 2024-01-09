@@ -2,10 +2,11 @@
 import type { StrapiData } from '~/ts/interfaces/strapi/StrapiData';
 import type { About } from '~/ts/interfaces/About';
 
+const config = useRuntimeConfig();
 const aboutText = ref<StrapiData<About>>();
 
 onMounted(async () => {
-    const response = await fetch(`http://localhost:1337/api/about/`);
+    const response = await fetch(`${config.public.apiUrl}/api/about/`);
     aboutText.value = await response.json() as StrapiData<About>;
 });
 </script>

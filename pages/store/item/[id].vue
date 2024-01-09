@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import { UrlService } from '~/ts/classes/UrlService';
 import { Mapper } from '~/ts/classes/Mapper';
 import type { DisabledDate } from '~/ts/interfaces/vcal/DisabledDate';
 import type { Item } from '~/ts/interfaces/Item';
 import type { StrapiData, StrapiDataItem } from '~/ts/interfaces/strapi/StrapiData';
 
-
-const urlService = new UrlService();
+const config = useRuntimeConfig();
 
 const route = useRoute();
 const id = route.params.id;
@@ -14,7 +12,7 @@ const item = ref<StrapiDataItem<Item> | null>();
 
 
 onMounted(async () => {
-    const response = await fetch(`${urlService.getApiUrl()}/api/items/${id}?populate=*`);
+    const response = await fetch(`${config.public.apiUrl}/api/items/${id}?populate=*`);
     const data = await response.json() as StrapiData<Item>;
     item.value = data.data;
 });
@@ -65,7 +63,7 @@ onMounted(async () => {
             </div>
         </div>
         <div class="store-item__thumnail">
-            <img :src="urlService.apiUrl + item?.attributes.Thumbnail?.data?.attributes.url" alt="Thumbnail">
+            <img :src="config.public.apiUrl + item?.attributes.Thumbnail?.data?.attributes.url" alt="Thumbnail">
 
         </div>
         <div class="store-item__description">

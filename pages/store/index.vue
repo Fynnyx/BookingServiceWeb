@@ -23,9 +23,8 @@ onMounted(async () => {
             <h2 class="room-card__name">{{ item.attributes.Name }}</h2>
             <span class="room-card__description">Description: {{ item.attributes.Description }}</span>
             <span class="room-card__price">Price: {{ item.attributes.Price }}</span>
-            <span class="room-card__bookings">Bookings: {{ item.attributes.bookings.data.length }}</span>
-            <!-- <span>{{ `localhost:1337${item.thumbnail.data.attributes.url}`}}</span> -->
-            <img :src="`${$config.public.apiUrl}${item.attributes.Thumbnail.data.attributes.url}`" alt="" class="room-card__thumbnail">
+            <span class="room-card__bookings">Bookings: {{ item.attributes.bookings.data?.length }}</span>
+            <img :src="`${$config.public.apiUrl}${item.attributes.Thumbnail.data?.attributes.url}`" alt="" class="room-card__thumbnail">
         </nuxt-link>
     </div>
 </template>
