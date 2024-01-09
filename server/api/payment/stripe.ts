@@ -5,12 +5,13 @@ import { StrapiDataItem } from "~/ts/interfaces/strapi/StrapiData";
 
 export default defineEventHandler(async (event) => {
     const body = await readBody(event);
-    const { 
+    const {
         id,
         services,
         range,
         user
     } = JSON.parse(body);
+
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
         apiVersion: "2023-10-16",
@@ -30,7 +31,6 @@ export default defineEventHandler(async (event) => {
     const bookingDays = Math.ceil((new Date(range.end).getTime() - new Date(range.start).getTime()) / (1000 * 60 * 60 * 24));
     const amount = item.attributes.Price * bookingDays;
 
-
     try {
         const paymentIntent = await stripe.paymentIntents.create({
             amount: amount * 100,
@@ -42,7 +42,6 @@ export default defineEventHandler(async (event) => {
                 range: range.toString()
             },
         });
-
         const response = await fetch(`${process.env.API_URL}/api/bookings`, {
             method: "POST",
             headers: {
@@ -66,19 +65,14 @@ export default defineEventHandler(async (event) => {
                 }
             }),
         });
+        
         const data = await response.json();
         if (data.error) {
-            return {
-                statusCode: 404,
-                body: JSON.stringify({ message: "Booking not found" }),
-            };
+            stripe.paymentIntents.cancel(paymentIntent.id);
+            return sendError(event, createError({statusCode: 500, message: "Error creating booking"}), false)
         }
-
         return { secret: paymentIntent.client_secret };
     } catch (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ message: (error as Error).message }),
-        };
+        return sendError(event, createError({statusCode: 500, message: "Error creating payment intent"}), false)
     }
 });
