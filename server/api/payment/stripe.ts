@@ -4,6 +4,7 @@ import { Item } from "~/ts/interfaces/Item";
 import { StrapiDataItem } from "~/ts/interfaces/strapi/StrapiData";
 
 export default defineEventHandler(async (event) => {
+    const config = useRuntimeConfig();
     const body = await readBody(event);
     const {
         id,
@@ -17,7 +18,7 @@ export default defineEventHandler(async (event) => {
         apiVersion: "2023-10-16",
     });
 
-    const response = await fetch(`${process.env.API_URL}/api/items/${id}`);
+    const response = await fetch(`${config.public.apiUrl}/api/items/${id}`);
     const data = await response.json();
     if (data.error) {
         return {
@@ -42,7 +43,7 @@ export default defineEventHandler(async (event) => {
                 range: range.toString()
             },
         });
-        const response = await fetch(`${process.env.API_URL}/api/bookings`, {
+        const response = await fetch(`${config.public.apiUrl}/api/bookings`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
