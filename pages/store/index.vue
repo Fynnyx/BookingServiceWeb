@@ -21,7 +21,7 @@ onMounted(async () => {
         <!-- <span>{{ items }}</span> -->
         <nuxt-link :to="`/store/item/${item.id}`" class="room-card" v-for="item in items" :key="item.id">
             <h2 class="room-card__name">{{ item.attributes.Name }}</h2>
-            <span class="room-card__description">Description: {{ item.attributes.Description }}</span>
+            <span class="room-card__description">{{ item.attributes.Description.slice(0, 100) }}{{ item.attributes.Description.length > 100 ? '...' : '' }}</span>
             <span class="room-card__price">Price: {{ item.attributes.Price }}</span>
             <span class="room-card__bookings">Bookings: {{ item.attributes.bookings.data?.length }}</span>
             <img :src="`${$config.public.apiUrl}${item.attributes.Thumbnail.data?.attributes.url}`" alt="" class="room-card__thumbnail">

@@ -1,15 +1,7 @@
-import { UrlService } from "./UrlService";
-
 export class BookingService {
-
-    urlService: UrlService;
-
-    constructor() {
-        this.urlService = new UrlService();
-    }
-
     async bookRoom(roomId: number, startDate: string, endDate: string, userId: number) {
-        const response = await fetch(`${this.urlService.getApiUrl()}/bookings`, {
+        const config = useRuntimeConfig();
+        const response = await fetch(`${config.public.apiUrl}/bookings`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
