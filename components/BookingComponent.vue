@@ -62,6 +62,11 @@ const handlePay = async (e: Event) => {
             }),
         });
         console.log("Response", response);
+        if (!response.ok) {
+            stripeErrors.value.push('An error occured on the server. Please try again later.');
+            loading.value = false;
+            return;
+        }
         const { secret: clientSecret } = await response.json();
         console.log("Client secret", clientSecret);
 
