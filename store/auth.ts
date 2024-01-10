@@ -13,6 +13,7 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
         user: null as User | null,
+        token: null as string | null,
         loading: false,
     }),
     getters: {
@@ -84,6 +85,7 @@ export const useAuthStore = defineStore('auth', {
             const user = useCookie('user'); // useCookie new hook in nuxt 3
             this.authenticated = false; // set authenticated  state value to false
             this.user = null; // set user state value to null
+            this.token = null; // set token state value to null
             token.value = null; // clear the token cookie
             user.value = null; // clear the user cookie
         },
