@@ -61,14 +61,12 @@ const handlePay = async (e: Event) => {
                 user: user.value?.id,
             }),
         });
-        console.log("Response", response);
         if (!response.ok) {
             stripeErrors.value.push('An error occured on the server. Please try again later.');
             loading.value = false;
             return;
         }
         const { secret: clientSecret } = await response.json();
-        console.log("Client secret", clientSecret);
 
         const { error: submitError } = await elements.submit();
         if (submitError) {
@@ -91,7 +89,6 @@ const handlePay = async (e: Event) => {
             // router.push('/payment/failure');
             stripeErrors.value.push(error.message ? error.message : 'An unknown error occured');
         } else {
-            console.log("Payment successful");
             changeSection('finish');
         }
 
