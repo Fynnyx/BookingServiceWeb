@@ -53,18 +53,18 @@ export const useAuthStore = defineStore('auth', {
 
             this.loading = pending;
 
-            // create a cart for the user
-            const { data: cartData, pending: cartPending }: any = await useFetch(`${config.public.apiUrl}/carts`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    user: data.value.id,
-                }),
-            });
+            // // create a cart for the user
+            // const { data: cartData, pending: cartPending }: any = await useFetch(`${config.public.apiUrl}/carts`, {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         user: data.value.id,
+            //     }),
+            // });
 
-            this.loading = cartPending;
+            // this.loading = cartPending;
 
             if (data.value) {
 

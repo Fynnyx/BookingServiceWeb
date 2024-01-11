@@ -42,7 +42,9 @@ const user = authStore.user;
             <slot />
         </div>
         <footer class="footer">
-            <h1>Footer</h1>
+            <nuxt-link to="/imprint" class="footer__link">Imprint</nuxt-link>
+            <span class="footer__item">&copy; Copyrigth 2024, <b>Fynnyx Inc.</b></span>
+            <nuxt-link to="/privacy" class="footer__link">Privacy Policy</nuxt-link>
         </footer>
     </div>
 </template>

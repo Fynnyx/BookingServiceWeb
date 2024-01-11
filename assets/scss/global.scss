@@ -56,4 +56,23 @@
 
 .footer {
     margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: $dark-green-120;
+    padding: 1.5rem;
+
+    &__link {
+        color: white;
+        text-decoration: none;
+        &:hover {
+            // color: $pink;
+            // font-weight: bold;
+            text-decoration: underline;
+        }
+    }
+
+    &__item {
+        color: white;
+    }
 }
