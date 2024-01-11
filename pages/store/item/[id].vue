@@ -61,6 +61,22 @@ onMounted(async () => {
                     <span>{{ item?.attributes.hasKitchen ? 'available' : 'unavailable' }}</span>
                 </div>
             </div>
+
+
+            <div class="store-item__meta__contact-address">
+                <div class="store-item__meta__contact">
+                    <h2>Contact</h2>
+                    <span><b>Firstname: </b>{{ item.attributes.Contact.Firstname }}</span>
+                    <span><b>Lastname: </b>{{ item.attributes.Contact.Lastname }}</span>
+                    <span><b>Phone: </b>{{ item.attributes.Contact.PhoneNumber }}</span>
+                    <span><b>Email: </b><a :href="`mailto:${item.attributes.Contact.Email}`">{{ item.attributes.Contact.Email
+                    }}</a></span>
+                </div>
+                <div class="store-item__meta__address">
+                    <h2>Address</h2>
+                    <span>{{ item.attributes.Address.address }}</span>
+                </div>
+            </div>
         </div>
         <div class="store-item__thumnail">
             <img :src="config.public.apiUrl + item?.attributes.Thumbnail?.data?.attributes.url" alt="Thumbnail">
@@ -101,7 +117,7 @@ onMounted(async () => {
             grid-template-columns: repeat(4, 1fr);
             width: 100%;
             grid-gap: 1rem;
-            margin-top: 2rem;
+            margin: 2rem 0;
 
             &__item {
                 display: flex;
@@ -117,6 +133,45 @@ onMounted(async () => {
                 span {
                     margin-left: 0.5rem;
                 }
+            }
+        }
+
+        &__contact-address {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+        }
+        &__contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            h2 {
+                margin-bottom: 0.5rem;
+            }
+
+            span {
+                margin-bottom: 0.5rem;
+                align-self: flex-start;
+            }
+        }
+
+        &__address {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            h2 {
+                margin-bottom: 0.5rem;
+            }
+
+            span {
+                margin-bottom: 0.5rem;
+                align-self: flex-start;
             }
         }
     }
@@ -138,10 +193,17 @@ onMounted(async () => {
         flex-direction: column;
         align-items: center;
 
-        > button {
+        >button {
             width: 100%;
             max-width: 20rem;
         }
+    }
+}
+
+@media (max-width: 1200px) {
+    .store-item {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
     }
 }
 </style>
