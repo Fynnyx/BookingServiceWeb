@@ -31,6 +31,7 @@ const login = async () => {
         <input v-model="user.password" type="password" class="input" placeholder="Enter Password" name="psw" required />
         <button @click.prevent="login" type="submit" class="button">Login</button>
     </form>
+    <span>Dont have an account? Register <nuxt-link to="/register">here.</nuxt-link></span>
 </template>
 
 <style lang="scss" scoped>

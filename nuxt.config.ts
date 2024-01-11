@@ -26,6 +26,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET,
+    API_TOKEN: process.env.API_TOKEN,
     public: {
       apiUrl: process.env.API_URL || "http://localhost:1337",
       STRIPE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,

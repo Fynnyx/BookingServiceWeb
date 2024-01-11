@@ -47,6 +47,7 @@ export default defineEventHandler(async (event) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${config.API_TOKEN}`,
             },
             body: JSON.stringify({
                 data: {

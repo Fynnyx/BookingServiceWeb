@@ -29,6 +29,7 @@
         & a {
             color: black;
             text-decoration: none;
+            font-weight: normal;
         }
         &__item {
             display: flex;
@@ -66,8 +67,8 @@
         color: white;
         text-decoration: none;
         &:hover {
-            // color: $pink;
-            // font-weight: bold;
+            color: white;
+            font-weight: bold;
             text-decoration: underline;
         }
     }

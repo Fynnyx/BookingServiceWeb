@@ -30,8 +30,9 @@ const user = authStore.user;
                 <li class="header__nav__item" v-if="authenticated">
                     <span>Authenticated as: <b>{{ user?.username }}</b></span>
                 </li>
-                <li v-if="!authenticated" id="loginBtn" class="header__nav__item__link">
-                    <nuxt-link to="/login">Login</nuxt-link>
+                <li v-if="!authenticated" class="header__nav__item">
+                    <nuxt-link id="loginBtn" class="header__nav__item__link" to="/login">Login</nuxt-link>
+                    <nuxt-link to="/register" class="header__nav__item__link">Register</nuxt-link>
                 </li>
                 <li v-if="authenticated" id="logoutBtn" class="header__nav__item">
                     <nuxt-link @click="logout" class="header__nav__item__link">Logout</nuxt-link>
@@ -43,7 +44,9 @@ const user = authStore.user;
         </div>
         <footer class="footer">
             <nuxt-link to="/imprint" class="footer__link">Imprint</nuxt-link>
+            <nuxt-link to="/about" class="footer__link">About</nuxt-link>
             <span class="footer__item">&copy; Copyrigth 2024, <b>Fynnyx Inc.</b></span>
+            <nuxt-link to="/tos" class="footer__link">Terms of Service</nuxt-link>
             <nuxt-link to="/privacy" class="footer__link">Privacy Policy</nuxt-link>
         </footer>
     </div>
