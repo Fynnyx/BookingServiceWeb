@@ -43,7 +43,7 @@ export const useAuthStore = defineStore('auth', {
         },
         async register(user: RegisterUser): Promise<Auth | undefined> {
             const config = useRuntimeConfig(); // useRuntimeConfig new hook in nuxt 3
-            const { data, pending }: any = await useFetch(`${config.public.apiUrl}/auth/local/register`, {
+            const { data, pending }: any = await useFetch(`${config.public.apiUrl}/api/auth/local/register?populte=*`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -74,7 +74,9 @@ export const useAuthStore = defineStore('auth', {
                 };
 
                 const token = useCookie('token'); // useCookie new hook in nuxt 3
+                const user = useCookie('user'); // useCookie new hook in nuxt 3
                 token.value = registeredUser.jwt; // set token to cookie
+                user.value = registeredUser.user; // set user to cookie
                 this.authenticated = true; // set authenticated  state value to true
 
                 return registeredUser;
