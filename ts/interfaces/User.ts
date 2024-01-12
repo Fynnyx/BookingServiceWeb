@@ -9,7 +9,7 @@ export interface User {
     confirmed: boolean;
     blocked: boolean;
 
-    bookings: StrapiDataCollection<Booking>;
+    bookings: Booking[];
 
     createdAt: string;
     updatedAt: string;

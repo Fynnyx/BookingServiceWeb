@@ -13,9 +13,8 @@ export interface Booking {
     ServiceMinibar: boolean;
 
     user: StrapiData<User>;
-    item: StrapiData<Item>;
+    item: Item;
 
-    created_at: Date;
-    updated_at: Date;
-    published_at: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }

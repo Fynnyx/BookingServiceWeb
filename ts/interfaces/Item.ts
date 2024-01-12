@@ -6,6 +6,7 @@ import type { Image } from "./strapi/Image";
 import type { StrapiData, StrapiDataCollection } from "./strapi/StrapiData";
 
 export interface Item {
+    id: number;
     Name: string;
     Description: string;
     Price: number;

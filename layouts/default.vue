@@ -28,14 +28,14 @@ const user = authStore.user;
             </ul>
             <ul class="header__nav header__nav__right">
                 <li class="header__nav__item" v-if="authenticated">
-                    <span>Authenticated as: <b>{{ user?.username }}</b></span>
+                    <nuxt-link to="/profile" class="header__nav__item__link"><font-awesome-icon :icon="['fas', 'user']" /></nuxt-link>
                 </li>
                 <li v-if="!authenticated" class="header__nav__item">
                     <nuxt-link id="loginBtn" class="header__nav__item__link" to="/login">Login</nuxt-link>
                     <nuxt-link to="/register" class="header__nav__item__link">Register</nuxt-link>
                 </li>
                 <li v-if="authenticated" id="logoutBtn" class="header__nav__item">
-                    <nuxt-link @click="logout" class="header__nav__item__link">Logout</nuxt-link>
+                    <nuxt-link @click="logout" class="header__nav__item__link" style="color: red;">Logout</nuxt-link>
                 </li>
             </ul>
         </header>
