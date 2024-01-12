@@ -15,7 +15,6 @@ const response = await fetch(`${config.public.apiUrl}/api/users/me?populate[book
 
 if (response.status === 200) {
     user = await response.json() as User;
-    console.log(user);
 
 } else {
     console.error('Error while fetching user data');
