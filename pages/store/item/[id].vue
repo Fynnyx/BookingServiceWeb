@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Mapper } from '~/ts/classes/Mapper';
-import type { DisabledDate } from '~/ts/interfaces/vcal/DisabledDate';
 import type { Item } from '~/ts/interfaces/Item';
 import type { StrapiData, StrapiDataItem } from '~/ts/interfaces/strapi/StrapiData';
 
@@ -12,13 +10,12 @@ const item = ref<StrapiDataItem<Item> | null>();
 
 
 onMounted(async () => {
-    const response = await fetch(`${config.public.apiUrl}/api/items/${id}?populate=*`);
+// {{host}}/api/items?populate[0]=documents&populate[documents][populate]=*&populate[Thumbnail][populate]=*
+    const response = await fetch(`${config.public.apiUrl}/api/items/${id}?populate[documents][populate]=*&populate[Thumbnail][populate]=*&populate[Contact]=*&populate[Address]=*&populate[Images][populate]=*&populate[bookings]=*`);
     const data = await response.json() as StrapiData<Item>;
     item.value = data.data;
+    console.log(data);
 });
-
-
-
 
 </script>
 
@@ -89,6 +86,22 @@ onMounted(async () => {
         <div class="store-item__booking">
             <h2>Booking</h2>
             <BookingComponent v-if="item" :item="item" />
+        </div>
+        <div class="store-item__images">
+            <h2>Images</h2>
+            <div class="store-item__images__list">
+                <div class="store-item__images__list__item" v-for="image in item?.attributes.Images?.data">
+                    <img :src="config.public.apiUrl + image.attributes.url" alt="Image">
+                </div>
+            </div>
+        </div>
+        <div class="store-item__documents">
+            <h2>Documents</h2>
+            <div class="store-item__documents__list">
+                <div class="store-item__documents__list__item" v-for="document in item.attributes.documents " :key="document.id">
+                    <a class="button" :href="config.public.apiUrl + document.Document.data?.attributes.url" target="_blank"> <font-awesome-icon icon="fa-solid fa-file"></font-awesome-icon> {{ document.DocumentName }}</a>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -196,6 +209,48 @@ onMounted(async () => {
         >button {
             width: 100%;
             max-width: 20rem;
+        }
+    }
+    &__images {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-column: 1 / span 2;
+
+        &__list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1rem;
+            width: 100%;
+            margin: 1rem 0;
+
+            &__item {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                border-radius: 0.5rem;
+                box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+    &__documents {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-column: 1 / span 2;
+
+        &__list {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            width: 100%;
+            margin: 1rem 0;
         }
     }
 }

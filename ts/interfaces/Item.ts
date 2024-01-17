@@ -2,6 +2,7 @@
 import type { Booking } from "./Booking";
 import type { Address } from "./components/Address";
 import type { Contact } from "./components/Contact";
+import type { Document } from "./components/Document";
 import type { Image } from "./strapi/Image";
 import type { StrapiData, StrapiDataCollection } from "./strapi/StrapiData";
 
@@ -22,6 +23,7 @@ export interface Item {
     Images: StrapiDataCollection<Image>;
     Contact: Contact;
     Address: Address;
+    documents: Document[];
 
     bookings: StrapiDataCollection<Booking>;
     created_at: string;

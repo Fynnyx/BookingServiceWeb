@@ -1,10 +1,12 @@
 import type { Booking } from "./Booking";
-import type { StrapiDataCollection } from "./strapi/StrapiData";
 
 export interface User {
     id: number;
     username: string;
     email: string;
+    Firstname: string;
+    Lastname: string;
+    Birthday: Date | null;
     provider: string;
     confirmed: boolean;
     blocked: boolean;
