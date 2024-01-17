@@ -27,7 +27,7 @@ onMounted(async () => {
 
                 <div class="store-item__meta__stats__item">
                     <font-awesome-icon icon="fa-solid fa-money-bill" />
-                    <span>{{ item?.attributes.Price }} CHF</span>
+                    <span>{{ item?.attributes.Price }} CHF <br>/ Night</span>
                 </div>
                 <div class="store-item__meta__stats__item">
                     <font-awesome-icon icon="fa-solid fa-bed" />

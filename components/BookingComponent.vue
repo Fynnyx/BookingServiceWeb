@@ -6,7 +6,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useAuthStore } from '~/store/auth';
 import type { Stripe, StripeElements } from '@stripe/stripe-js';
 import type { DisabledDate } from '~/ts/interfaces/vcal/DisabledDate';
-import type { Services } from '~/ts/interfaces/Services';
 import type { StrapiDataItem } from '~/ts/interfaces/strapi/StrapiData';
 
 
@@ -56,7 +55,7 @@ const handlePay = async (e: Event) => {
             method: 'POST',
             body: JSON.stringify({
                 id: props.item.id,
-                services: services.value,
+                comment: comment.value,
                 range: range.value,
                 user: user.value?.id,
             }),
@@ -119,7 +118,7 @@ disabledDates.value = mapper.bookingsToDisabledDates(props.item.attributes.booki
 
 // Modal functions
 
-var modalSection = ref<string>('services');
+var modalSection = ref<string>('summary');
 
 const openModal = () => {
     // Check if range is set
@@ -150,7 +149,7 @@ const changeSection = (section: string) => {
 }
 
 // Services
-const services = ref<Number[]>([]);
+const comment = ref<string>('');
 
 // Watch the range variable for changes
 watch(range, (newVal, oldVal) => {
@@ -170,35 +169,6 @@ watch(range, (newVal, oldVal) => {
             <li v-for="error in errors" :key="error">{{ error }}</li>
         </ul>
     </div>
-    <dialog id="services-modal" class="modal">
-        <div class="modal__content">
-            <div class="modal__header">
-                <h2>Services</h2>
-                <button class="close-button" aria-label="close modal" data-close @click="closeModal">✕</button>
-            </div>
-            <div class="modal__body">
-                <p>Select all services you wish to book with the room.</p>
-                <div class="services">
-                    <div class="service">
-                        <input type="checkbox" id="food" v-model="services" :value="1">
-                        <label for="food">Food</label>
-                    </div>
-                    <div class="service">
-                        <input type="checkbox" id="cleaning" v-model="services" :value="2">
-                        <label for="cleaning">Cleaning</label>
-                    </div>
-                    <div class="service">
-                        <input type="checkbox" id="minibar" v-model="services" :value="3">
-                        <label for="minibar">Minibar</label>
-                    </div>
-                </div>
-            </div>
-            <div class="modal__footer">
-                <button class="button" @click="closeModal">Cancel</button>
-                <button class="button" @click="changeSection('summary')">Next</button>
-            </div>
-        </div>
-    </dialog>
     <dialog id="summary-modal" class="modal">
         <div class="modal__content">
             <div class="modal__header">
@@ -208,11 +178,27 @@ watch(range, (newVal, oldVal) => {
             <div class="modal__body">
                 <p>This is the final page before final booking and paying for the selected object.</p>
                 <div class="summary">
+                    <div class="summary__item">
+                        <!-- Show a summary with all values -->
+                        <h3>Item</h3>
+                        <p>{{ props.item.attributes.Name }}</p>
+                        <p>{{ props.item.attributes.Price }} CHF / Night</p>
+                        <hr>
+                        <h3>Total</h3>
+                        <p>{{ range ? (Math.ceil((new Date(range?.end).getTime() - new Date(range?.start).getTime())) /
+                            (1000 * 60 * 60 * 24)) * props.item.attributes.Price : 0 }}
+                            CHF</p>
 
+                    </div>
+                    <!-- input for comment -->
+                    <div class="summary__comment">
+                        <label for="comment">Comment</label>
+                        <textarea v-model="comment" name="comment" id="comment" cols="30" rows="10"></textarea>
+                    </div>
                 </div>
             </div>
             <div class="modal__footer">
-                <button class="button" @click="changeSection('services')">Back</button>
+                <button class="button" @click="closeModal">Cancel</button>
                 <button class="button" @click="changeSection('payment')">Next</button>
             </div>
         </div>
@@ -299,8 +285,21 @@ watch(range, (newVal, oldVal) => {
     }
 }
 
+.summary {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    &>div {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex: 1;
+        padding: 1rem;
+    }
+}
+
 .errors {
     list-style: none;
     color: red;
-}
-</style>
+}</style>

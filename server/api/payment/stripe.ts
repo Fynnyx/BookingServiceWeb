@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const {
         id,
-        services,
+        comment,
         range,
         user
     } = JSON.parse(body);
@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
             metadata: {
                 user: user,
                 item: item.id,
-                services: services,
+                comment: comment,
                 range: range.toString()
             },
         });
@@ -60,10 +60,9 @@ export default defineEventHandler(async (event) => {
                     // Dates in YYYY-MM-DD
                     StartDate: new Date(range.start).toISOString().split("T")[0],
                     EndDate: new Date(range.end).toISOString().split("T")[0],
-                    ServiceFood: services.includes(1),
-                    ServiceCleaning: services.includes(2),
-                    ServiceTransport: services.includes(3),
-                    comment: null
+                    Costs: amount,
+                    TransactionId: paymentIntent.id,
+                    Comment: comment
                 }
             }),
         });
