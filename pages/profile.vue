@@ -22,7 +22,13 @@ if (response.status === 200) {
 </script>
 
 <template>
-    <h1>Profile: {{ user.username }}</h1>
+    <h1>Hey: {{ user.Firstname }}</h1>
+
+    <h2>Personal Information</h2>
+    <p>Firstname: {{ user.Firstname }}</p>
+    <p>Lastname: {{ user.Lastname }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Birthday: {{ user.Birthday }}</p>
 
     <h2>Bookings</h2>
     <table class="booking-table">
