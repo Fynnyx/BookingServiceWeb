@@ -1,3 +1,6 @@
+import { configDotenv } from "dotenv"
+
+configDotenv()
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -28,7 +31,7 @@ export default defineNuxtConfig({
     STRIPE_ENDPOINT_SECRET: process.env.STRIPE_ENDPOINT_SECRET,
     API_TOKEN: process.env.API_TOKEN,
     public: {
-      apiUrl: process.env.API_URL || "http://localhost:1337",
+      apiUrl: process.env.API_URL || "https://api.booking.fynnwesterath.ch",
       STRIPE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
     }
   },
