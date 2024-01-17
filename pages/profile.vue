@@ -30,6 +30,8 @@ if (response.status === 200) {
             <th>ID</th>
             <th>Start</th>
             <th>End</th>
+            <th>Costs</th>
+            <th>Transction ID</th>
             <th>Booked at</th>
             <th>Link</th>
         </tr>
@@ -37,6 +39,8 @@ if (response.status === 200) {
             <td>{{ `#${booking.id}` }}</td>
             <td>{{ booking.StartDate }}</td>
             <td>{{ booking.EndDate }}</td>
+            <td>{{ booking.Costs }} CHF</td>
+            <td>{{ booking.TransactionId }}</td>
             <td>{{ booking.createdAt }}</td>
             <td><nuxt-link :to="`/store/item/${booking.item.id}`">{{ booking.item.Name }}</nuxt-link></td>
         </tr>
