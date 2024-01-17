@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import type { Auth, RegisterUser } from '@/ts/interfaces/Auth';
-import type { Cart } from '~/ts/interfaces/Cart';
-import type { Booking } from '~/ts/interfaces/Booking';
 import type { User } from '~/ts/interfaces/User';
 
 interface UserPayloadInterface {
     identifier: string;
     password: string;
+    Firstname: string;
+    Lastname: string;
+    Birthday: Date;
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore('auth', {
         getUser: (state) => state.user,
     },
     actions: {
-        async authenticateUser({ identifier, password }: UserPayloadInterface) {
+        async authenticateUser({ identifier, password }: UserPayloadInterface) : Promise<String[] | void> {
             const config = useRuntimeConfig(); // useRuntimeConfig new hook in nuxt 3
             // useFetch from nuxt 3
             const { data, pending }: any = await useFetch(`${config.public.apiUrl}/api/auth/local`, {
@@ -39,6 +40,8 @@ export const useAuthStore = defineStore('auth', {
                 user.value = data?.value?.user; // set user to cookie
                 this.authenticated = true; // set authenticated  state value to true
                 this.user = data.value.user;
+            } else {
+                return data?.errors?.map((error: any) => error.message);
             }
         },
         async register(user: RegisterUser): Promise<Auth | undefined> {

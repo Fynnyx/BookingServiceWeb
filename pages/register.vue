@@ -11,13 +11,20 @@ const user = ref({
     password: '',
     Firstname: '',
     Lastname: '',
-    Birthday: '',
+    Birthday: new Date(),
 });
 const messages = ref([]);
 const router = useRouter();
 
 const register = async () => {
-    await registerUser({ username: user.value.identifier, email: user.value.identifier, password: user.value.password }); // call authenticateUser and pass the user object
+    await registerUser({
+        username: user.value.identifier,
+        email: user.value.identifier,
+        password: user.value.password,
+        Firstname: user.value.Firstname,
+        Lastname: user.value.Lastname,
+        Birthday: user.value.Birthday
+    }); // call authenticateUser and pass the user object
     if (authenticated) {
         router.push('/');
     }
@@ -30,14 +37,11 @@ const register = async () => {
         <form id="registerForm">
             <!-- Add Firstname and Lastname -->
             <label for="fname"><b>Firstname</b></label>
-            <input v-model="user.Firstname" type="text" class="input" placeholder="Enter Firstname" name="fname"
-                required />
+            <input v-model="user.Firstname" type="text" class="input" placeholder="Enter Firstname" name="fname" required />
             <label for="lname"><b>Lastname</b></label>
-            <input v-model="user.Lastname" type="text" class="input" placeholder="Enter Lastname" name="lname"
-                required />
+            <input v-model="user.Lastname" type="text" class="input" placeholder="Enter Lastname" name="lname" required />
             <label for="bday"><b>Birthday</b></label>
-            <input v-model="user.Birthday" type="date" class="input" placeholder="Enter Birthday" name="bday"
-                required />
+            <input v-model="user.Birthday" type="date" class="input" placeholder="Enter Birthday" name="bday" required />
             <label for="uname"><b>Email</b></label>
             <input v-model="user.identifier" type="email" class="input" placeholder="Enter Username" name="uname"
                 required />
